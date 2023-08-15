@@ -1,6 +1,7 @@
 #pragma once
 
-#include "config.h"
+#include <stdbool.h>
 
-int regresja_init(unsigned n, unsigned delta);
+int regresja_init(unsigned n, float * buffer, float delta);
 float regresja( float val );
+bool regresja_ready();
