@@ -9,5 +9,7 @@ def test_o5():
 
     for n in range(10):
         vv = r.calc(n)
-        if vv:
-            print( "{}: {}".format(n,vv) )
+        if n < 4:
+            assert vv is None
+        else:
+            assert vv == 1.0
