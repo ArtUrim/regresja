@@ -5,7 +5,7 @@ class Regresja:
     def __init__(self,n,delta=1):
         self.n = n
         self.delta = 12.0/(delta*n*(n*n-1))
-        self.step = 1
+        self.step = 0
         self.vals = []
         self.sxy = 0.0
         self.sy = 0.0
@@ -36,9 +36,9 @@ class Regresja:
 
 if __name__ == "__main__":
 
-    r = Regresja(5)
+    r = Regresja(5,0.1)
 
     for n in range(10):
-        vv = r.calc(n)
+        vv = r.calc(3*n)
         if vv:
             print( "{}: {}".format(n,vv) )
