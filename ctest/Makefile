@@ -19,3 +19,12 @@ $(EXEC): $(OBJECTS)
 
 clean:
 	rm -f $(EXEC) $(OBJECTS)
+
+gt: gt.o regresja.o gtest-all.o
+	g++ -o $@ $^
+
+gt.o:gt.cpp
+	g++ -c -I/usr/src/googletest/googletest/include $<
+
+gtest-all.o:/usr/src/googletest/googletest/src/gtest-all.cc
+	g++ -c -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest $<
