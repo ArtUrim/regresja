@@ -5,16 +5,16 @@ extern  "C" {
 }
 
 // The fixture for testing class Foo.
-class RegresjaTest : public ::testing::Test {
+class OneCurveTest : public ::testing::Test {
  protected:
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
-  RegresjaTest() {
+  OneCurveTest() {
      // You can do set-up work for each test here.
   }
 
-  ~RegresjaTest() override {
+  ~OneCurveTest() override {
      // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -39,7 +39,7 @@ class RegresjaTest : public ::testing::Test {
 #define STEPS 5
 
 // Tests that the Foo::Bar() method does Abc.
-TEST_F(RegresjaTest, Basic) {
+TEST_F(OneCurveTest, UpSlowEdge) {
 
 	float buffer[STEPS];
 	regresja_init( STEPS, buffer, 0.1f ); 

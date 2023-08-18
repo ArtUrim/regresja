@@ -20,11 +20,11 @@ $(EXEC): $(OBJECTS)
 clean:
 	rm -f $(EXEC) $(OBJECTS)
 
-gt: gt.o regresja.o gtest-all.o
-	g++ -o $@ $^
+CXXOBJS = gt.o \
+			 gtest_onecurve.o
 
-gt.o:gt.cpp
-	g++ -c -I/usr/src/googletest/googletest/include $<
+gt: $(CXXOBJS) regresja.o
+	g++ -o $@ $^ -lgtest_main -lgtest
 
-gtest-all.o:/usr/src/googletest/googletest/src/gtest-all.cc
-	g++ -c -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest $<
+%.o:%.cpp
+	g++ -c $<
