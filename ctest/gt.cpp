@@ -5,16 +5,16 @@ extern  "C" {
 }
 
 // The fixture for testing class Foo.
-class RegresjaTest : public ::testing::Test {
+class RegresjaBasic : public ::testing::Test {
  protected:
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
-  RegresjaTest() {
+  RegresjaBasic() {
      // You can do set-up work for each test here.
   }
 
-  ~RegresjaTest() override {
+  ~RegresjaBasic() override {
      // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -38,8 +38,7 @@ class RegresjaTest : public ::testing::Test {
 #define N 10
 #define STEPS 5
 
-// Tests that the Foo::Bar() method does Abc.
-TEST_F(RegresjaTest, Basic) {
+TEST_F(RegresjaBasic, o5) {
 
 	float buffer[STEPS];
 	regresja_init( STEPS, buffer, 0.1f ); 
@@ -53,6 +52,29 @@ TEST_F(RegresjaTest, Basic) {
 			EXPECT_EQ( regresja_ready(), true );
 			EXPECT_FLOAT_EQ( val, 10.0f );
 		}
+	}
+  
+}
+
+TEST_F(RegresjaBasic, o10) {
+
+	float buffer[STEPS];
+	EXPECT_EQ( regresja_init( STEPS, buffer, 1.0f ), 0 );
+	for( int i = 0; i < N; i++ )
+	{
+		float val = regresja( (float)i );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_FLOAT_EQ( val, 1.0f );
+		}
+	}
+	for( int i = N; i < 15; i++ ) {
+		float val = regresja( 2.0*i );
+		if( i == 14 )
+			EXPECT_FLOAT_EQ( val, 2.0 );
 	}
   
 }
