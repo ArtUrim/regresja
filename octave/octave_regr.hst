@@ -1,0 +1,143 @@
+137215-8192
+ans*521
+ss=137215-8192
+ss/2
+ss/2/1024
+exit
+# Octave 7.3.0, Mon Aug 14 09:22:46 2023 CEST <artloz@FTKRL6068>
+xit
+ n = 50;
+ x = sort (rand (n,1) * 5 - 1);
+ y = 1 + 0.05 * x + 0.1 * randn (size (x));
+ F = [ones(n, 1), x(:)];
+ [p, e_var, r, p_var, fit_var] = LinearRegression (F, y);
+ yFit = F * p;
+ figure ()
+ plot(x, y, '+b', x, yFit, '-g',...
+      x, yFit + 1.96 * sqrt (e_var), '--r',...
+      x, yFit + 1.96 * sqrt (fit_var), '--k',...
+      x, yFit - 1.96 * sqrt (e_var), '--r',...
+      x, yFit - 1.96 * sqrt (fit_var), '--k')
+ title ('straight line fit by linear regression')
+ legend ('data','fit','+/-95% y values','+/- 95% fitted values','location','northwest')
+quit
+# Octave 7.3.0, Thu Aug 17 08:01:40 2023 CEST <artloz@FTKRL6068>
+cd Test/r
+r
+pkg install "https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.6.0.tar.gz"
+x=[ones(4,1); 1:4]
+x=[ones(4,1); 1:4']
+x=ones(4,1)
+[1:4]
+[1:4]'
+x=[ones(4,1); [1:4]']
+x=[ones(4,1) [1:4]']
+y=2([1:4]'
+y=2*[1:4]'
+v=regres(y,x)
+v=regress(y,x)
+pkg install "https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.6.0.tar.gz"
+quit
+# Octave 7.3.0, Thu Aug 17 08:10:26 2023 CEST <artloz@FTKRL6068>
+pkg install "https://github.com/gnu-octave/statistics/archive/refs/tags/release-1.6.0.tar.gz"
+v=regress(y,x)
+y=2.*[1:5]'
+x=[ones(4,1) [1:4]']
+x=[ones(5,1) [1:5]']
+v=regress(y,x)
+pkg load statistics 
+v=regress(y,x)
+[b bint r rint stats]=regress(y,x)
+quit
+# Octave 7.3.0, Thu Aug 17 08:16:03 2023 CEST <artloz@FTKRL6068>
+pkg load statistics 
+x=[1:20]'
+y=[[1:10]'; [22:2:40]']
+plot(x,y,'b+')
+[x y]
+y=[[1:10]'; [12:2:30]']
+[x y]
+plot(x,y,'b+')
+y2=[[2:2:20]'; [21:30]']
+[x y y2]
+plot(x,y,'b+',x,y2,'*g')
+30-y
+31-y
+y3=31-y
+y4=31-y2
+[x y y2 y3 y4]'
+[x y y2 y3 y4]
+plot(x,y,'b+',x,y2,'*g',x,y3,'or',x,y4,'-k')
+[1:5 12]
+[1:5 6.1 7.2]
+15*15
+25/30+5*29/30
+25/30+5*25/30
+225/30+15*25/30
+xx=[5:20]'
+xx.*xx
+xx=[5:15]'
+y5=[ [1:5]'; xx.*xx/30+5*xx/6 2*[16:20]'-10]
+y5=[ [1:5]'; xx.*xx/30+5*xx/6; 2*[16:20]'-10]
+plot(x,y5,'gx')
+[x y5]
+y2
+y1
+y 
+y5
+[x y]
+[x; 1 y5]
+[x; 1 y5]
+x
+[x; 1]
+[[x; 22] y5]
+[[x; 22] [y; 32] y5]
+y5=[ [1:4]'; xx.*xx/30+5*xx/6; 2*[16:20]'-10]
+[x y y5]
+plot(x,y5,'gx')
+[x y y2 y3 y4 y5]
+csvwrite('onecurve.csv',[x y y2 y3 y4 y5])
+pwd
+y5
+-25/30+13*5/6
+-225/30+13/6*15
+xx
+[x y y2 y3 y4 y5]
+[[2:2:8]'; 13/6*xx-xx.*xx/30; [26:30]']
+y6=[[2:2:8]'; 13/6*xx-xx.*xx/30; [26:30]']
+[x y y2 y3 y4 y5 y6]
+y7=31-y5
+y8=31-y6
+csvwrite('onecurve.csv',[x y y2 y3 y4 y5 y6 y7 y8])
+csvwrite('onecurve.csv',[x y y2 y3 y4 y5 y6 y7 y8])
+[x y y2 y3 y4 y5 y6 y7 y8]
+y=[[1:10]'; [12:2:30]']
+[x y]
+y=[[1:10]'; [12:2:30]'; [33:3:48]']
+y=[[1:10]'; [12:2:30]']
+z=[[1:10]'; [12:2:30]'; [33:3:48]']
+size(z)
+x2=[1:26]'
+[x2 z]
+z
+z=[[1:10]'; [12:2:30]'; [33:3:48]']
+z=[[1:10]'; [12:3:30]']
+z=[[1:10]'; [12:3:30]'; [32:2:48]']
+size(z)
+z=[[1:10]'; [12:2:30]'; [33:3:48]']
+z2=[[1:10]'; [12:3:30]'; [32:2:48]']
+[x2 x x2]
+[x2 z z2]
+[x2 z z2 49-z1 49-z2]
+[x2 z z2 49-z 49-z2]
+csvwrite( 'edges2.csv',[x2 z z2 49-z 49-z2])
+csvwrite( 'edges2.csv',[x2 z z2 49-z 49-z2]')
+csvwrite('onecurve.csv',[x y y2 y3 y4 y5 y6 y7 y8]')
+[x y y2 y3 y4 y5 y6 y7 y8]
+regress
+[ones(20,1) x]
+regress(y,[ones(20,1) x])
+x(1:5)
+regress(y(1:5),[ones(5,1) x(1:5)])
+help history
+history -w octave_regr.hst
