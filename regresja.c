@@ -1,17 +1,27 @@
 #include "regresja.h"
 
-int regresja_init(RegresjaConfig *pConfig, unsigned n, float * buffer, float delta)
+#include <stdlib.h>
+
+RegresjaConfig * regresja_init(RegresjaConfig *pConfig, unsigned n, float * buffer, float delta)
 {
-	pConfig->regr_val = 0.0f;
-	pConfig->buffer = buffer;
-	pConfig->delta = 12.0f/(delta*n*(n*n-1));
-	pConfig->last_val = 0;
-	pConfig->n = n;
-	pConfig->sxy = 0.0f;
-	pConfig->sy = 0.0;
-	pConfig->coeff_sy = (float)(n+1)*0.5f;
-	pConfig->reg_state = Initialized;
-	return 0;
+	if( buffer == NULL )
+		buffer = (float *)malloc( n*sizeof(float) );
+	if( pConfig == NULL )
+		pConfig = (RegresjaConfig *)malloc( sizeof(RegresjaConfig) );
+
+	if( pConfig != NULL ) {
+		pConfig->regr_val = 0.0f;
+		pConfig->buffer = buffer;
+		pConfig->delta = 12.0f/(delta*n*(n*n-1));
+		pConfig->last_val = 0;
+		pConfig->n = n;
+		pConfig->sxy = 0.0f;
+		pConfig->sy = 0.0;
+		pConfig->coeff_sy = (float)(n+1)*0.5f;
+		pConfig->reg_state = Initialized;
+	}
+
+	return pConfig;
 }
 
 float regresja( RegresjaConfig *pConfig, float val )

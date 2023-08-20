@@ -21,6 +21,6 @@ typedef struct {
 	
 } RegresjaConfig;
 
-int regresja_init(RegresjaConfig *pConfig, unsigned n, float * buffer, float delta);
+RegresjaConfig * regresja_init(RegresjaConfig *pConfig, unsigned n, float * buffer, float delta);
 float regresja( RegresjaConfig *pConfig, float val );
 bool regresja_ready( RegresjaConfig *pConfig );
