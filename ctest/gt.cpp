@@ -41,7 +41,24 @@ class RegresjaBasic : public ::testing::Test {
 
 TEST_F(RegresjaBasic, init ) {
 	float buffer[STEPS];
-	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 2.3f ), 0 );
+	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 2.3f ), &config );
+}
+
+TEST_F(RegresjaBasic, EmptyBuffer ) {
+	EXPECT_EQ( regresja_init( &config, STEPS, NULL, 2.3f ), &config );
+}
+
+TEST_F(RegresjaBasic, EmptyConfig ) {
+	float buffer[STEPS];
+
+	RegresjaConfig *pConfig = regresja_init( NULL, STEPS, buffer, 2.3f );
+	EXPECT_NE( pConfig, nullptr );
+}
+
+TEST_F(RegresjaBasic, EmptyBoth ) {
+
+	RegresjaConfig *pConfig = regresja_init( NULL, STEPS, NULL, 2.3f );
+	EXPECT_NE( pConfig, nullptr );
 }
 
 TEST_F(RegresjaBasic, o5) {
@@ -65,7 +82,7 @@ TEST_F(RegresjaBasic, o5) {
 TEST_F(RegresjaBasic, o10) {
 
 	float buffer[STEPS];
-	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 1.0f ), 0 );
+	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 1.0f ), &config );
 	for( int i = 0; i < N; i++ )
 	{
 		float val = regresja( &config, (float)i );
