@@ -10,11 +10,11 @@ extern  "C" {
 
 // The fixture for testing class Foo.
 class OneCurveTest : public ::testing::Test {
-	static std::vector< std::vector<float> > vv;
 	static bool initDone;
 	static void initData();
 
  protected:
+	static std::vector< std::vector<float> > vv;
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
@@ -75,35 +75,207 @@ void OneCurveTest::initData()
 		}
 	}
 	ifh.close();
-
-	for( std::vector< std::vector<float> >::iterator il = vv.begin();
-			il != vv.end(); il++ ) {
-		for( std::vector<float>::iterator ip = (*il).begin(); ip != (*il).end(); ip++ )
-		{
-			std::cout << *ip << " ";
-		}
-		std::cout << std::endl;
-	}
 }
 
 #define N 10
 #define STEPS 5
 
-// Tests that the Foo::Bar() method does Abc.
 TEST_F(OneCurveTest, UpSlowEdge) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 0.1f ); 
-	for( int i = 0; i < N; i++ )
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[1].begin();
+			it != OneCurveTest::vv[1].end(); it++ )
 	{
-		float val = regresja( (float)i );
+		float val = regresja( *it );
 		if( i < 4 )
 		{
 			EXPECT_EQ( regresja_ready(), false );
 		} else {
 			EXPECT_EQ( regresja_ready(), true );
-			EXPECT_FLOAT_EQ( val, 10.0f );
+			if( i == 5 )
+				EXPECT_FLOAT_EQ( val, 1.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, 2.0f );
 		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, UpFastEdge) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[2].begin();
+			it != OneCurveTest::vv[2].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 5 )
+				EXPECT_FLOAT_EQ( val, 2.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, 1.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, DownSlowEdge) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[3].begin();
+			it != OneCurveTest::vv[3].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 5 )
+				EXPECT_FLOAT_EQ( val, -1.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, -2.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, DownFastEdge) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[4].begin();
+			it != OneCurveTest::vv[4].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 5 )
+				EXPECT_FLOAT_EQ( val, -2.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, -1.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, UpSlowSmooth) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[5].begin();
+			it != OneCurveTest::vv[5].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 4 )
+				EXPECT_FLOAT_EQ( val, 1.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, 2.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, UpFastSmooth) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[6].begin();
+			it != OneCurveTest::vv[6].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 4 )
+				EXPECT_FLOAT_EQ( val, 2.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, 1.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, DownSlowSmooth) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[7].begin();
+			it != OneCurveTest::vv[7].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 4 )
+				EXPECT_FLOAT_EQ( val, -1.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, -2.0f );
+		}
+		i++;
+	}
+  
+}
+
+TEST_F(OneCurveTest, DownFastSmooth) {
+
+	float buffer[STEPS];
+	regresja_init( STEPS, buffer, 1.0f ); 
+
+	int i = 0;
+	for( std::vector<float>::iterator it = OneCurveTest::vv[8].begin();
+			it != OneCurveTest::vv[8].end(); it++ )
+	{
+		float val = regresja( *it );
+		if( i < 4 )
+		{
+			EXPECT_EQ( regresja_ready(), false );
+		} else {
+			EXPECT_EQ( regresja_ready(), true );
+			if( i == 4 )
+				EXPECT_FLOAT_EQ( val, -2.0f );
+			else if( i == 20 )
+				EXPECT_FLOAT_EQ( val, -1.0f );
+		}
+		i++;
 	}
   
 }

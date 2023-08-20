@@ -1,4 +1,4 @@
-EXEC = ctest
+EXEC = gt
 
 all:$(EXEC)
 
@@ -8,11 +8,10 @@ CC = /usr/bin/gcc
 
 VPATH = .:..
 
-OBJECTS = main.o \
-			 regresja.o
-
-$(EXEC): $(OBJECTS)
-	$(CC) -o $@ $^
+OBJECTS = regresja.o \
+			 gt.o \
+			 gtest_onecurve.o \
+			 gtest_twocurves.o
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) -o $@ $<
@@ -20,10 +19,8 @@ $(EXEC): $(OBJECTS)
 clean:
 	rm -f $(EXEC) $(OBJECTS)
 
-CXXOBJS = gt.o \
-			 gtest_onecurve.o
 
-gt: $(CXXOBJS) regresja.o
+$(EXEC): $(OBJECTS)
 	g++ -o $@ $^ -lgtest_main -lgtest
 
 %.o:%.cpp

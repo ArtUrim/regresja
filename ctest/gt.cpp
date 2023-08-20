@@ -38,6 +38,11 @@ class RegresjaBasic : public ::testing::Test {
 #define N 10
 #define STEPS 5
 
+TEST_F(RegresjaBasic, init ) {
+	float buffer[STEPS];
+	EXPECT_EQ( regresja_init( STEPS, buffer, 2.3f ), 0 );
+}
+
 TEST_F(RegresjaBasic, o5) {
 
 	float buffer[STEPS];
