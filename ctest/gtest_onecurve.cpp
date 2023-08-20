@@ -18,6 +18,8 @@ class OneCurveTest : public ::testing::Test {
   // You can remove any or all of the following functions if their bodies would
   // be empty.
 
+  RegresjaConfig config;
+
   OneCurveTest() {
      // You can do set-up work for each test here.
 	  if( initDone == false )
@@ -83,18 +85,18 @@ void OneCurveTest::initData()
 TEST_F(OneCurveTest, UpSlowEdge) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[1].begin();
 			it != OneCurveTest::vv[1].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, 1.0f );
 			else if( i == 20 )
@@ -108,18 +110,18 @@ TEST_F(OneCurveTest, UpSlowEdge) {
 TEST_F(OneCurveTest, UpFastEdge) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[2].begin();
 			it != OneCurveTest::vv[2].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, 2.0f );
 			else if( i == 20 )
@@ -133,18 +135,18 @@ TEST_F(OneCurveTest, UpFastEdge) {
 TEST_F(OneCurveTest, DownSlowEdge) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[3].begin();
 			it != OneCurveTest::vv[3].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, -1.0f );
 			else if( i == 20 )
@@ -158,18 +160,18 @@ TEST_F(OneCurveTest, DownSlowEdge) {
 TEST_F(OneCurveTest, DownFastEdge) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[4].begin();
 			it != OneCurveTest::vv[4].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, -2.0f );
 			else if( i == 20 )
@@ -183,18 +185,18 @@ TEST_F(OneCurveTest, DownFastEdge) {
 TEST_F(OneCurveTest, UpSlowSmooth) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[5].begin();
 			it != OneCurveTest::vv[5].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 4 )
 				EXPECT_FLOAT_EQ( val, 1.0f );
 			else if( i == 20 )
@@ -208,18 +210,18 @@ TEST_F(OneCurveTest, UpSlowSmooth) {
 TEST_F(OneCurveTest, UpFastSmooth) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[6].begin();
 			it != OneCurveTest::vv[6].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 4 )
 				EXPECT_FLOAT_EQ( val, 2.0f );
 			else if( i == 20 )
@@ -233,18 +235,18 @@ TEST_F(OneCurveTest, UpFastSmooth) {
 TEST_F(OneCurveTest, DownSlowSmooth) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[7].begin();
 			it != OneCurveTest::vv[7].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 4 )
 				EXPECT_FLOAT_EQ( val, -1.0f );
 			else if( i == 20 )
@@ -258,18 +260,18 @@ TEST_F(OneCurveTest, DownSlowSmooth) {
 TEST_F(OneCurveTest, DownFastSmooth) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = OneCurveTest::vv[8].begin();
 			it != OneCurveTest::vv[8].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 4 )
 				EXPECT_FLOAT_EQ( val, -2.0f );
 			else if( i == 20 )

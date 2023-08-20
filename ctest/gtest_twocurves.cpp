@@ -17,6 +17,7 @@ class TwoCurvesTest : public ::testing::Test {
 	static std::vector< std::vector<float> > vv;
   // You can remove any or all of the following functions if their bodies would
   // be empty.
+  RegresjaConfig config;
 
   TwoCurvesTest() {
      // You can do set-up work for each test here.
@@ -83,18 +84,18 @@ void TwoCurvesTest::initData()
 TEST_F(TwoCurvesTest, Up123) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = TwoCurvesTest::vv[1].begin();
 			it != TwoCurvesTest::vv[1].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, 1.0f );
 			else if( i == 14 )
@@ -110,18 +111,18 @@ TEST_F(TwoCurvesTest, Up123) {
 TEST_F(TwoCurvesTest, Up132) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = TwoCurvesTest::vv[2].begin();
 			it != TwoCurvesTest::vv[2].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, 1.0f );
 			else if( i == 14 )
@@ -137,18 +138,18 @@ TEST_F(TwoCurvesTest, Up132) {
 TEST_F(TwoCurvesTest, Down123) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = TwoCurvesTest::vv[3].begin();
 			it != TwoCurvesTest::vv[3].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, -1.0f );
 			else if( i == 14 )
@@ -164,18 +165,18 @@ TEST_F(TwoCurvesTest, Down123) {
 TEST_F(TwoCurvesTest, Down132) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 1.0f ); 
+	regresja_init( &config, STEPS, buffer, 1.0f ); 
 
 	int i = 0;
 	for( std::vector<float>::iterator it = TwoCurvesTest::vv[4].begin();
 			it != TwoCurvesTest::vv[4].end(); it++ )
 	{
-		float val = regresja( *it );
+		float val = regresja( &config, *it );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			if( i == 5 )
 				EXPECT_FLOAT_EQ( val, -1.0f );
 			else if( i == 14 )

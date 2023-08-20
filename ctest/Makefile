@@ -12,6 +12,7 @@ OBJECTS = regresja.o \
 			 gt.o \
 			 gtest_onecurve.o \
 			 gtest_twocurves.o
+  
 
 %.o:%.c
 	$(CC) -c $(CFLAGS) -o $@ $<

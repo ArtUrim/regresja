@@ -9,6 +9,7 @@ class RegresjaBasic : public ::testing::Test {
  protected:
   // You can remove any or all of the following functions if their bodies would
   // be empty.
+  RegresjaConfig config;
 
   RegresjaBasic() {
      // You can do set-up work for each test here.
@@ -40,21 +41,21 @@ class RegresjaBasic : public ::testing::Test {
 
 TEST_F(RegresjaBasic, init ) {
 	float buffer[STEPS];
-	EXPECT_EQ( regresja_init( STEPS, buffer, 2.3f ), 0 );
+	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 2.3f ), 0 );
 }
 
 TEST_F(RegresjaBasic, o5) {
 
 	float buffer[STEPS];
-	regresja_init( STEPS, buffer, 0.1f ); 
+	regresja_init( &config, STEPS, buffer, 0.1f ); 
 	for( int i = 0; i < N; i++ )
 	{
-		float val = regresja( (float)i );
+		float val = regresja( &config, (float)i );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			EXPECT_FLOAT_EQ( val, 10.0f );
 		}
 	}
@@ -64,20 +65,20 @@ TEST_F(RegresjaBasic, o5) {
 TEST_F(RegresjaBasic, o10) {
 
 	float buffer[STEPS];
-	EXPECT_EQ( regresja_init( STEPS, buffer, 1.0f ), 0 );
+	EXPECT_EQ( regresja_init( &config, STEPS, buffer, 1.0f ), 0 );
 	for( int i = 0; i < N; i++ )
 	{
-		float val = regresja( (float)i );
+		float val = regresja( &config, (float)i );
 		if( i < 4 )
 		{
-			EXPECT_EQ( regresja_ready(), false );
+			EXPECT_EQ( regresja_ready( &config), false );
 		} else {
-			EXPECT_EQ( regresja_ready(), true );
+			EXPECT_EQ( regresja_ready( &config), true );
 			EXPECT_FLOAT_EQ( val, 1.0f );
 		}
 	}
 	for( int i = N; i < 15; i++ ) {
-		float val = regresja( 2.0*i );
+		float val = regresja( &config, 2.0*i );
 		if( i == 14 )
 			EXPECT_FLOAT_EQ( val, 2.0 );
 	}
